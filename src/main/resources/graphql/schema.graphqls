@@ -1,0 +1,21 @@
+type Query {
+    jokes: [Joke]
+    categories: [Category]
+    jokeById(id: ID!): Joke
+    jokesByCategories(categories: [Int]): [Joke]
+}
+
+type Joke {
+    id: ID!
+    categories: [Category]
+    created_at: String
+    icon_url: String
+    updated_at: String
+    url: String
+    data: String
+}
+
+type Category {
+    id: ID!
+    data: String
+}
