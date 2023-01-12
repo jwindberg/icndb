@@ -1,8 +1,20 @@
 type Query {
-    jokes: [Joke]
-    categories: [Category]
-    jokeById(id: ID!): Joke
-    jokesByCategories(categories: [Int]): [Joke]
+    jokes: [Joke]!
+    joke(id: ID!): Joke
+    jokeByCategory(categories: [Int]): [Joke]!
+
+    categories: [Category]!
+    category(id: ID!): Category
+}
+
+type Mutation {
+    createCategory(data: String): Category
+    updateCategory(id: ID, data: String): Category
+    deleteCategory(data: String): Category
+
+    createJoke(guid: String, categories: [Int], url: String, icon_url: String, data: String): Joke
+    updateJoke(id: ID, guid: String, categories: [Int], url: String, icon_url: String, data: String): Joke
+    deleteJoke(data: String): Joke
 }
 
 type Joke {

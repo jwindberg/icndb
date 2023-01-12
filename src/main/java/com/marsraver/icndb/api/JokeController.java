@@ -19,7 +19,7 @@ import java.util.Set;
 public class JokeController {
 
     private JokeService jokeService;
-    
+
     @GetMapping("jokes")
     public ResponseEntity<Collection<Joke>> allJokesByCategory(@RequestParam(value = "category", required = false) Set<Integer> categories) {
         if (CollectionUtils.isEmpty(categories)) {
@@ -30,7 +30,7 @@ public class JokeController {
     }
 
     @GetMapping("joke/{id}")
-    public ResponseEntity<Joke> jokeById(@PathVariable String id) {
+    public ResponseEntity<Joke> jokeById(@PathVariable Integer id) {
         Optional<Joke> joke = jokeService.findJokeById(id);
         return joke.isPresent() ? ResponseEntity.ok(joke.get()) : ResponseEntity.notFound().build();
     }

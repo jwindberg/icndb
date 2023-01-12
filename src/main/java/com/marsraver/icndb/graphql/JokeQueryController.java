@@ -4,11 +4,13 @@ import com.marsraver.icndb.api.JokeService;
 import com.marsraver.icndb.data.Joke;
 import lombok.AllArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Controller
@@ -23,7 +25,7 @@ public class JokeQueryController {
     }
 
     @QueryMapping
-    public Optional<Joke> jokeById(@Argument String id) {
+    public Optional<Joke> joke(@Argument Integer id) {
         return jokeService.findJokeById(id);
     }
 
@@ -31,4 +33,21 @@ public class JokeQueryController {
     public Iterable<Joke> jokesByCategories(@Argument Collection<Integer> categories) {
         return jokeService.findJokesByCategories(categories);
     }
+
+    @MutationMapping
+    public Joke createJoke(@Argument String guid, @Argument Set<Integer> categories, @Argument String url, @Argument String icon_url, @Argument String data) {
+        return jokeService.createJoke(guid, categories, url, icon_url, data);
+    }
+
+    @MutationMapping
+    public Optional<Joke> updateJoke(@Argument Integer id, @Argument String guid, @Argument Set<Integer> categories,
+                                     @Argument String url, @Argument String icon_url, @Argument String data) {
+        return jokeService.updateJoke(id, guid, categories, url, icon_url, data);
+    }
+
+    @MutationMapping
+    public Optional<Joke> deleteJoke(@Argument Integer id) {
+        return jokeService.deleteJoke(id);
+    }
+
 }
