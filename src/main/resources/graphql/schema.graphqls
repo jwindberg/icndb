@@ -19,6 +19,7 @@ type Mutation {
 
 type Joke {
     id: ID!
+    guid: String
     categories: [Category]
     created_at: String
     icon_url: String

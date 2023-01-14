@@ -30,9 +30,9 @@ public class JokeController {
     }
 
     @GetMapping("joke/{id}")
-    public ResponseEntity<Joke> jokeById(@PathVariable Integer id) {
+    public ResponseEntity<Joke> jokeById(@PathVariable Long id) {
         Optional<Joke> joke = jokeService.findJokeById(id);
-        return joke.isPresent() ? ResponseEntity.ok(joke.get()) : ResponseEntity.notFound().build();
+        return joke.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("categories")

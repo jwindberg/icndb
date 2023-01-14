@@ -31,7 +31,7 @@ public class JokeService {
         return toList(jokeRepository.findAll());
     }
 
-    public Optional<Joke> findJokeById(Integer id) {
+    public Optional<Joke> findJokeById(Long id) {
         return jokeRepository.findById(id);
     }
 
@@ -44,7 +44,7 @@ public class JokeService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<Joke> deleteJoke(Integer id) {
+    public Optional<Joke> deleteJoke(Long id) {
         Optional<Joke> jokeOption = findJokeById(id);
         jokeOption.ifPresent(joke -> jokeRepository.delete(joke));
         return jokeOption;
@@ -63,7 +63,7 @@ public class JokeService {
         return jokeRepository.save(joke);
     }
 
-    public Optional<Joke> updateJoke(Integer id, String guid, Set<Integer> categories, String url, String icon_url, String data) {
+    public Optional<Joke> updateJoke(Long id, String guid, Set<Integer> categories, String url, String icon_url, String data) {
         Optional<Joke> jokeOption = findJokeById(id);
         jokeOption.ifPresent(joke -> {
             joke.setGuid(guid);
@@ -92,6 +92,7 @@ public class JokeService {
     public Optional<Category> updateCategory(Integer id, String data) {
         Optional<Category> categoryOption = findCategoryById(id);
         categoryOption.ifPresent(category -> {
+            category.setData(data);
             categoryRepository.save(category);
         });
         return categoryOption;

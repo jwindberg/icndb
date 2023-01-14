@@ -25,7 +25,7 @@ public class JokeQueryController {
     }
 
     @QueryMapping
-    public Optional<Joke> joke(@Argument Integer id) {
+    public Optional<Joke> joke(@Argument Long id) {
         return jokeService.findJokeById(id);
     }
 
@@ -40,13 +40,13 @@ public class JokeQueryController {
     }
 
     @MutationMapping
-    public Optional<Joke> updateJoke(@Argument Integer id, @Argument String guid, @Argument Set<Integer> categories,
+    public Optional<Joke> updateJoke(@Argument Long id, @Argument String guid, @Argument Set<Integer> categories,
                                      @Argument String url, @Argument String icon_url, @Argument String data) {
         return jokeService.updateJoke(id, guid, categories, url, icon_url, data);
     }
 
     @MutationMapping
-    public Optional<Joke> deleteJoke(@Argument Integer id) {
+    public Optional<Joke> deleteJoke(@Argument Long id) {
         return jokeService.deleteJoke(id);
     }
 

@@ -5,9 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Collection;
 
-;
-
-public interface JokeRepository extends CrudRepository<Joke, Integer> {
+public interface JokeRepository extends CrudRepository<Joke, Long> {
 
     @Query("select j from Joke j join j.categories category where category.id in (:categories)")
     Iterable<Joke> findAllByCategory(Collection<Integer> categories);
