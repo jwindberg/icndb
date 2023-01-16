@@ -16,6 +16,8 @@ import java.util.stream.StreamSupport;
 @Service
 @AllArgsConstructor
 public class JokeService {
+
+    private static final Random RANDOM = new Random();
     private JokeRepository jokeRepository;
     private CategoryRepository categoryRepository;
 
@@ -27,12 +29,17 @@ public class JokeService {
         return categoryRepository.findById(id);
     }
 
-    public Collection<Joke> findAllJokes() {
+    public List<Joke> findAllJokes() {
         return toList(jokeRepository.findAll());
     }
 
     public Optional<Joke> findJokeById(Long id) {
         return jokeRepository.findById(id);
+    }
+
+    public Joke randomJoke() {
+        List<Joke> allJokes = findAllJokes();
+        return allJokes.get(RANDOM.nextInt(allJokes.size() - 1));
     }
 
     public List<Joke> findJokesByCategories(Collection<Integer> categories) {
